@@ -1,0 +1,292 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace ModuleofSong
+{
+
+    class Program
+    {
+        public struct Song
+        {
+            public string Author { get; set; }
+            public string Name { get; set; }
+            public double Lengthout { get; set; }
+            public Genre Genreout;
+        }
+        public enum Genre
+        { Genre1, Genre2, Genre3 }
+
+        
+
+        static void Main(string[] args)
+        {
+            Song[] songs = new Song[5];
+            songs[0].Author = "a0";
+            songs[0].Genreout = Genre.Genre1;
+            songs[0].Name = "n0";
+            songs[0].Lengthout = 2.23;
+
+            songs[1].Author = "a1";
+            songs[1].Genreout = Genre.Genre1;
+            songs[1].Name = "n1";
+            songs[1].Lengthout = 3.23;
+
+            songs[2].Author = "a2";
+            songs[2].Genreout = Genre.Genre2;
+            songs[2].Name = "n2";
+            songs[2].Lengthout = 4.23;
+
+            songs[3].Author = "a3";
+            songs[3].Genreout = Genre.Genre1;
+            songs[3].Name = "n3";
+            songs[3].Lengthout = 5.23;
+
+            songs[4].Author = "a4";
+            songs[4].Genreout = Genre.Genre3;
+            songs[4].Name = "n4";
+            songs[4].Lengthout = 6.23;
+
+
+
+
+            Console.WriteLine("1:-Изменить название песни по индексу и распечатать все");
+            Console.WriteLine("nomber of song 1-5");
+
+            int x = int.Parse(Console.ReadLine());
+            Console.WriteLine("info (N.array = N.case - 1)  -------- in");
+            Console.WriteLine("\nautor :{0} \nname :{1} \nLength :{2}\n Ganre :{3}", songs[x - 1].Author, songs[x - 1].Name, songs[x - 1].Lengthout, songs[x - 1].Genreout);
+            if (x < 1 || x > 5)
+            {
+                Console.WriteLine("Please reenter(wrong namber):");
+            }
+            else
+            {
+                Console.WriteLine("что изменять:\n1 - Author\n2 - Genreout\n3 - Name\n4 - Lengthout");
+                int y = int.Parse(Console.ReadLine());
+                if (y < 1 || y > 4)
+                {
+                    Console.WriteLine("Please reenter(wrong namber):");
+                }
+                switch (y)
+                {
+                    case 1:
+                        Console.WriteLine("New Autor");
+                        songs[x-1].Author = Console.ReadLine();
+                        break;
+
+                    case 2:
+                        Console.WriteLine("Select new ganre:1-{0},2-{1},3-{2}", Genre.Genre1, Genre.Genre2, Genre.Genre3);
+                        int z1 = int.Parse(Console.ReadLine());
+                        if (z1 < 1 || z1 > 3)
+                        {
+                            Console.WriteLine("Please reenter(wrong namber):");
+                        }
+                        else switch (z1)
+                            {
+                                case 1: songs[x-1].Genreout = Genre.Genre1; break;
+                                case 2: songs[x-1].Genreout = Genre.Genre2; break;
+                                case 3: songs[x-1].Genreout = Genre.Genre3; break;
+                                default: break;
+                            }
+                        break;
+
+                    case 3:
+                        Console.WriteLine("New Name");
+                        string nNa2 = Console.ReadLine();
+                        songs[x-1].Name = nNa2;
+                        break;
+
+                    case 4:
+                        Console.WriteLine("New Lengthout(examble 4,22)");
+                        songs[x-1].Lengthout = double.Parse(Console.ReadLine());
+                        break;
+                    default: break;
+
+                }
+                Console.WriteLine("info (N.array = N.case - 1)  -------- out");
+                Console.WriteLine("\nautor :{0} \nname :{1} \nLength :{2}\n Ganre :{3}", songs[x - 1].Author, songs[x - 1].Name, songs[x - 1].Lengthout, songs[x - 1].Genreout);
+                Console.ReadLine();
+            }
+            Console.WriteLine("2:-Найдите самую длинную песню и распечатайте информацию об этом");
+            int tempi = 0;
+            for (int i = 0; i < songs.Length; i++)
+            {
+                double tempL = 0.0;
+
+                for (int j = songs.Length; j > 1; j--)
+                {
+                    if (songs[i].Lengthout > songs[j - 1].Lengthout)
+                    {
+                        tempL = songs[i].Lengthout;
+                        tempi = i;
+                    }
+                }
+
+            }
+            Console.WriteLine("maxLength song is Author.{0} Name.{1} Lenght.{2} Genre.{3}", songs[tempi].Author, songs[tempi].Name, songs[tempi].Lengthout, songs[tempi].Genreout);
+            Console.ReadLine();
+            Console.WriteLine("3:-Распечатать все песни выбранного жанра");
+            Console.WriteLine("select Ganre\n1 - {0}\n2 - {1}\n3 - {2}", Genre.Genre1, Genre.Genre2, Genre.Genre3);
+            x = int.Parse(Console.ReadLine());
+
+            if (x < 1 || x > 3)
+            {
+                Console.WriteLine("Please reenter(wrong namber):");
+            }
+            else switch (x)
+                {
+                    case 1:
+                        Console.WriteLine("Ganre :{0}", Genre.Genre1);
+                        for (int i = 0; i < songs.Length; i++)
+                        {
+                            if (songs[i].Genreout == Genre.Genre1)
+                            {
+                                Console.WriteLine("\nautor :{0} \nname :{1} \nLength :{2} \nGanre {3}", songs[i].Author, songs[i].Name, songs[i].Lengthout, songs[i].Genreout);
+                            }
+                        }
+                        break;
+                    case 2:
+                        Console.WriteLine("Ganre :{0}", Genre.Genre2);
+                        for (int i = 0; i < songs.Length; i++)
+                        {
+                            if (songs[i].Genreout == Genre.Genre2)
+                            {
+                                Console.WriteLine("\nautor :{0} \nname :{1} \nLength :{2} \nGanre {3}", songs[i].Author, songs[i].Name, songs[i].Lengthout, songs[i].Genreout);
+                            }
+                        }
+                        break;
+                    case 3:
+                        Console.WriteLine("Ganre :{0}", Genre.Genre3);
+                        for (int i = 0; i < songs.Length; i++)
+                        {
+                            if (songs[i].Genreout == Genre.Genre3)
+                            {
+                                Console.WriteLine("\nautor :{0} \nname :{1} \nLength :{2} \nGanre {3}", songs[i].Author, songs[i].Name, songs[i].Lengthout, songs[i].Genreout);
+                            }
+                        }
+                        break;
+
+                    default: break;
+                }
+            Console.WriteLine("4:-Возможность добавлять и удалять новую песню(удалить по индексу)");
+            Console.WriteLine("4:-Deletin for index");
+            Console.WriteLine("old array 0 to {0}", songs.Length);
+            Console.WriteLine("select array del 0 to {0}", songs.Length);
+            int r = int.Parse(Console.ReadLine());
+            Song[] songs1 = new Song[songs.Length-1];
+            int fe = 0;
+            for (int i = 0; i < songs1.Length; i++)
+            {
+              
+                if (i!=r)
+                {
+                   
+                    songs1[fe].Author = songs[i].Author;
+                    songs1[fe].Genreout = songs[i].Genreout;
+                    songs1[fe].Name = songs[i].Name;
+                    songs1[fe].Lengthout = songs[i].Lengthout;
+                    fe += 1;
+                 }
+            }
+            Array.Resize(ref songs, songs1.Length);
+            Array.Copy(songs1, songs, songs1.Length);
+            //Array.Re
+
+
+            //songs[r].Author = null;
+            //songs[r].Genreout = 0;
+            //songs[r].Name = null;
+            //songs[r].Lengthout = 0;
+
+
+            //Array.Clear(songs, r, 1);
+            Console.WriteLine("new array {0}", songs.Length);
+            for (int i = 0; i < songs.Length; i++)
+            {
+                Console.WriteLine("\nautor :{0} \nname :{1} \nLength :{2}\n Ganre :{3}", songs[i].Author, songs[i].Name, songs[i].Lengthout, songs[i].Genreout);
+            }
+            Console.WriteLine("4:-Возможность добавлять и удалять новую песню(удалить по индексу)");
+            Console.WriteLine("4:-plus song");
+            Console.WriteLine("old array {0}", songs.Length);
+            x = songs.Length+1;
+            Array.Resize(ref songs, x);
+            Console.WriteLine("new array {0}", songs.Length);
+            Console.WriteLine("New Autor");
+            string nAut = Console.ReadLine();
+            songs[x-1].Author = nAut;
+
+            //Console.WriteLine("Select new ganre:1-{0},2-{1},3-{2}", Genre.Genre1, Genre.Genre2, Genre.Genre3);
+            //int z = int.Parse(Console.ReadLine());
+            //if (z < 1 || z > 3)
+            //{
+            //    Console.WriteLine("Please reenter(wrong namber):");
+            //    Plus();
+
+            //}
+            //else switch (z)
+            //    {
+            //        case 1: songs[x].Genreout = Genre.Genre1; break;
+            //        case 2: songs[x].Genreout = Genre.Genre2; break;
+            //        case 3: songs[x].Genreout = Genre.Genre3; break;
+            //        default: break;
+            //    }
+            Console.WriteLine("New Name");
+            string nNa = Console.ReadLine();
+            songs[x-1].Name = nNa;
+            Console.WriteLine("New Lengthout(examble 4,22)");
+            songs[x-1].Lengthout = double.Parse(Console.ReadLine());
+            Console.WriteLine("Select new ganre:1-{0},2-{1},3-{2}", Genre.Genre1, Genre.Genre2, Genre.Genre3);
+            int z = int.Parse(Console.ReadLine());
+            if (z < 1 || z > 3)
+            {
+                Console.WriteLine("Please reenter(wrong namber):");
+            }
+            else switch (z)
+                {
+                    case 1: songs[x-1].Genreout = Genre.Genre1; break;
+                    case 2: songs[x-1].Genreout = Genre.Genre2; break;
+                    case 3: songs[x-1].Genreout = Genre.Genre3; break;
+                    default: break;
+                }
+            for (int i = 0; i < songs.Length; i++)//display all
+            {
+                Console.WriteLine("\nautor :{0} \nname :{1} \nLength :{2}\n Ganre :{3}", songs[i].Author, songs[i].Name, songs[i].Lengthout, songs[i].Genreout);
+            }
+            Console.ReadLine();
+            //songs = Array.Resize<Song>(ref songs, new int [fo]);
+            //songs = ResizeArray(songs, new int[] {fo});
+            //Array.Resize<songs> (Song[] songs, r);
+            //
+
+
+
+        }
+    }
+}
+
+
+
+   
+        //static void View()
+        //{
+        //    Console.WriteLine("info - N.array = N.case - 1");
+
+        //    switch (x)
+        //    {
+        //        case 1: Console.WriteLine("\nautor :{0} \nname :{1} \nLength :{2}\n Ganre :{3}", songs[x - 1].Author, songs[x - 1].Name, songs[x - 1].Lengthout, songs[x - 1].Genreout); break;
+        //        case 2: Console.WriteLine("\nautor :{0} \nname :{1} \nLength :{2}\n Ganre :{3}", songs[x - 1].Author, songs[x - 1].Name, songs[x - 1].Lengthout, songs[x - 1].Genreout); break;
+        //        case 3: Console.WriteLine("\nautor :{0} \nname :{1} \nLength :{2}\n Ganre :{3}", songs[x - 1].Author, songs[x - 1].Name, songs[x - 1].Lengthout, songs[x - 1].Genreout); break;
+        //        case 4: Console.WriteLine("\nautor :{0} \nname :{1} \nLength :{2}\n Ganre :{3}", songs[x - 1].Author, songs[x - 1].Name, songs[x - 1].Lengthout, songs[x - 1].Genreout); break;
+        //        case 5: Console.WriteLine("\nautor :{0} \nname :{1} \nLength :{2}\n Ganre :{3}", songs[x - 1].Author, songs[x - 1].Name, songs[x - 1].Lengthout, songs[x - 1].Genreout); break;
+        //        default: break;
+        //    }
+        //}
+      
+        
+        
+       
+      
