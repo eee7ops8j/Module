@@ -1,0 +1,2 @@
+# Module
+variable static error
