@@ -191,6 +191,7 @@ namespace ModuleofSong
                 {
                     case 1:
                         Cross();
+                        View();
                         Cross1();
                         Rev();
                         Cross();
@@ -334,28 +335,29 @@ namespace ModuleofSong
             string nAut = Console.ReadLine();
             songs[x].Author = nAut;
 
+            Ganalize();
+           
+            //Console.WriteLine("Select new ganre:1-{0},2-{1},3-{2}", Genre.Genre1, Genre.Genre2, Genre.Genre3);
+            //int z = int.Parse(Console.ReadLine());
+            //if (z < 1 || z > 3)
+            //{
+            //    Console.WriteLine("Please reenter(wrong namber):");
+            //    Plus();
 
-            Console.WriteLine("Select new ganre:1-{0},2-{1},3-{2}", Genre.Genre1, Genre.Genre2, Genre.Genre3);
-            int z = int.Parse(Console.ReadLine());
-            if (z < 1 || z > 3)
-            {
-                Console.WriteLine("Please reenter(wrong namber):");
-                Gan1();
-
-            }
-            else switch (z)
-                {
-                    case 1: songs[x].Genreout = Genre.Genre1; break;
-                    case 2: songs[x].Genreout = Genre.Genre2; break;
-                    case 3: songs[x].Genreout = Genre.Genre3; break;
-                    default: break;
-                }
+            //}
+            //else switch (z)
+            //    {
+            //        case 1: songs[x].Genreout = Genre.Genre1; break;
+            //        case 2: songs[x].Genreout = Genre.Genre2; break;
+            //        case 3: songs[x].Genreout = Genre.Genre3; break;
+            //        default: break;
+            //    }
             Console.WriteLine("New Name");
             string nNa = Console.ReadLine();
             songs[x].Name = nNa;
             Console.WriteLine("New Lengthout(examble 4,22)");
             songs[x].Lengthout = double.Parse(Console.ReadLine());
-            for (int i = 0; i < songs.Length; i++)
+            for (int i = 0; i < songs.Length; i++)//display all
             {
                 Console.WriteLine("\nautor :{0} \nname :{1} \nLength :{2}\n Ganre :{3}", songs[i].Author, songs[i].Name, songs[i].Lengthout, songs[i].Genreout);
             }
