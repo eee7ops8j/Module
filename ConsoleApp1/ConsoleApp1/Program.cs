@@ -11,10 +11,6 @@ namespace ModuleofSong
     {
 
         public static int x, y, fo = 5;
-        //private songs;
-
-        //Song[] songs = new Song[fo];
-
         private static Song[] songs = new Song[fo];
 
         public struct Song
@@ -63,7 +59,7 @@ namespace ModuleofSong
             {
                 case 1:
                     Console.WriteLine("New Autor");
-                    songs[x].Author = Console.ReadLine();
+                    songs[x-1].Author = Console.ReadLine();
                     //string nAut = Console.ReadLine();
                     //songs[x].Author = nAut;
                     break;
@@ -75,11 +71,11 @@ namespace ModuleofSong
                 case 3:
                     Console.WriteLine("New Name");
                     string nNa = Console.ReadLine();
-                    songs[x].Name = nNa;
+                    songs[x-1].Name = nNa;
                     break;
                 case 4:
                     Console.WriteLine("New Lengthout(examble 4,22)");
-                    songs[x].Lengthout = double.Parse(Console.ReadLine()); break;
+                    songs[x-1].Lengthout = double.Parse(Console.ReadLine()); break;
                 default: break;
 
             }
@@ -96,9 +92,9 @@ namespace ModuleofSong
             }
             else switch (z)
                 {
-                    case 1: songs[x].Genreout = Genre.Genre1; break;
-                    case 2: songs[x].Genreout = Genre.Genre2; break;
-                    case 3: songs[x].Genreout = Genre.Genre3; break;
+                    case 1: songs[x-1].Genreout = Genre.Genre1; break;
+                    case 2: songs[x-1].Genreout = Genre.Genre2; break;
+                    case 3: songs[x-1].Genreout = Genre.Genre3; break;
                     default: break;
                 }
 
@@ -170,7 +166,22 @@ namespace ModuleofSong
 
 
             Console.ReadKey();
+            Console.WriteLine("Restart programm \n1-yes\n2-no\n:");
+            x = int.Parse(Console.ReadLine());
 
+            if (x < 0 || x > 2)
+            {
+                Console.Clear();
+                Console.WriteLine("Please reenter(wrong namber):");
+                Main(args);
+            }
+            else switch (x)
+                {
+                    case 1: Console.Clear(); Main(args); break;
+                    case 2:break;
+                    default: break;
+
+                }
         }
         static void View1()
         {
@@ -299,15 +310,35 @@ namespace ModuleofSong
         }
         static void Del()
         {
-            Console.WriteLine("old array 0 to {0}", fo);
+            Console.WriteLine("old array {0}", fo);
             Console.WriteLine("select array del");
             int r = int.Parse(Console.ReadLine());
-            songs[r].Author = null;
-            songs[r].Genreout = 0;
-            songs[r].Name = null;
-            songs[r].Lengthout = 0;
+            Song[] songs1 = new Song[songs.Length - 1];
+            int fe = 0;
+            for (int i = 0; i < songs1.Length; i++)
+            {
 
-            //  Array.Clear(songs, r, 1);
+                if (i != r)
+                {
+
+                    songs1[fe].Author = songs[i].Author;
+                    songs1[fe].Genreout = songs[i].Genreout;
+                    songs1[fe].Name = songs[i].Name;
+                    songs1[fe].Lengthout = songs[i].Lengthout;
+                    fe += 1;
+                }
+            }
+            Array.Resize(ref songs, songs1.Length);
+            Array.Copy(songs1, songs, songs1.Length);
+            //          \\\\мусор
+            //
+            //int r = int.Parse(Console.ReadLine());
+            //songs[r].Author = null;
+            //songs[r].Genreout = 0;
+            //songs[r].Name = null;
+            //songs[r].Lengthout = 0;
+
+            ////  Array.Clear(songs, r, 1);
 
 
 
